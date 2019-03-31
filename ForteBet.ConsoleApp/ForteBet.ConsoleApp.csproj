@@ -1,16 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.60.6" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FuteBet.Dominio\FuteBet.Dominio.csproj" />
+    <ProjectReference Include="..\FuteBet.Infra\FuteBet.Infra.csproj" />
     <ProjectReference Include="..\FuteBet.Shared\FuteBet.Shared.csproj" />
   </ItemGroup>
 

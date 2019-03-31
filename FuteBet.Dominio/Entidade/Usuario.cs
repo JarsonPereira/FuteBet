@@ -40,5 +40,6 @@ namespace FuteBet.Dominio.Entidade
         public Email Email { get; private set; }
         public Senha Senha { get; private set; }
         public Status Status { get; private set; }
+        public string TokenAcesso { get; private set; }
     }
 }
