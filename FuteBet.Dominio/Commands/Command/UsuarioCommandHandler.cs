@@ -26,12 +26,16 @@ namespace FuteBet.Dominio.Commands.Command
             Email email = new Email(request.Email);
             Senha senha = new Senha(request.Senha);
             Usuario usuario = new Usuario(email, senha);
+             LoginUsuarioResponse loginUsuarioRequest = new LoginUsuarioResponse() { Autenticado = false };
+
+            if (!usuario.IsValid())
+            {
+                 return loginUsuarioRequest;
+            }
 
             LoginUsuarioResult loginUsuario =  usuarioRepositorio.LoginUsuario(usuario);
 
-            LoginUsuarioResponse loginUsuarioRequest = new LoginUsuarioResponse() { Autenticado = false };
-
-            if (loginUsuario == null)
+            if (loginUsuario == null )
             {
                  return loginUsuarioRequest;
             }
@@ -44,7 +48,9 @@ namespace FuteBet.Dominio.Commands.Command
             loginUsuarioRequest.DataInicio = DateTime.Now;
             loginUsuarioRequest.DataExpiracao = loginUsuarioRequest.DataInicio.AddMinutes(15);
             loginUsuarioRequest.Token = loginUsuario.Token;
-
+            loginUsuarioRequest.ID = loginUsuario.ID;
+            loginUsuarioRequest.Email = loginUsuario.Email;
+            loginUsuarioRequest.Nome = loginUsuario.Nome;
 
             return loginUsuarioRequest;
         }

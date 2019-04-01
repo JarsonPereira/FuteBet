@@ -14,7 +14,7 @@ namespace FuteBet.Infra.SGBD
 
         public MSSqlServer()
         {
-            StringConexao = @"server=CDS-JARSON\SQLEXPRESS;database=FuteBet;User Id=sa;Password=123;";
+            StringConexao = @"server=CDS-JARSON\SQLEXPRESS;database=Futebet;User Id=sa;Password=123;";
         }
 
         public void CommitTransaction()

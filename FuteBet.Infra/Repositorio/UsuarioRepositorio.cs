@@ -18,7 +18,7 @@ namespace FuteBet.Infra.Repositorio
 
         public LoginUsuarioResult LoginUsuario(Usuario loginUsuario)
         {
-            string query = "Select ID,NOME,STATUS from Usuario where email = @EMAIL and senha=@SENHA";
+            string query = "Select ID,Nome,Email,Status,TokenAcesso as Token  from Usuario where email = @EMAIL and senha=@SENHA";
            using(var con = GetDB.GetDbConnection())
             {
                 return con.QueryFirstOrDefault<LoginUsuarioResult>(query, new { EMAIL = loginUsuario.Email.Endereco, SENHA = loginUsuario.Senha.SenhaForte });

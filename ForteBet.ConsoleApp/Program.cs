@@ -2,6 +2,11 @@
 using FuteBet.Dominio.Commands.Request;
 using FuteBet.Dominio.Commands.Response;
 using System;
+using SimpleInjector;
+using FuteBet.Infra.SGBD;
+using FuteBet.Infra.DB;
+using FuteBet.Dominio.Repositorio;
+using FuteBet.Infra.Repositorio;
 
 namespace ForteBet.ConsoleApp
 {
@@ -9,22 +14,19 @@ namespace ForteBet.ConsoleApp
     {
         static void Main(string[] args)
         {
-            //LoginUsuarioRequest loginUsuarioRequest = new LoginUsuarioRequest();
-            //loginUsuarioRequest.Email = "jarson@gmail.com";
-            //loginUsuarioRequest.Senha = "12345";
+            Container container = new Container();
+            container.Register<IDB, MSSqlServer>(Lifestyle.Singleton);
+            container.Register<IUsuarioRepositorio, UsuarioRepositorio>();
 
-            //UsuarioCommandHandler usuarioCommand = new UsuarioCommandHandler();
-            //LoginUsuarioResponse response =(LoginUsuarioResponse) usuarioCommand.Handler(loginUsuarioRequest);
+            var conexao = container.GetInstance<IUsuarioRepositorio>();
 
-            //Console.WriteLine("Acesso:"+response.Acesso);
-            //Console.WriteLine("Token:"+response.Token);
-            //Console.WriteLine();
-            //Console.WriteLine("Notificações:");
-            //foreach (var item in response.Notificacoes)
-            //{
-            //    Console.WriteLine(item.Property+"  -  "+item.Message);
-            //}
-          
+            LoginUsuarioRequest loginUsuarioRequest = new LoginUsuarioRequest();
+            loginUsuarioRequest.Email = "jarsono90@gmail.com";
+            loginUsuarioRequest.Senha = "123456";
+
+            UsuarioCommandHandler usuarioCommand = new UsuarioCommandHandler(conexao);
+            LoginUsuarioResponse response = (LoginUsuarioResponse)usuarioCommand.Handler(loginUsuarioRequest);
+
             Console.ReadKey();
         }
     }

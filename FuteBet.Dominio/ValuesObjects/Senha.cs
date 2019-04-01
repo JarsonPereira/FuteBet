@@ -11,7 +11,7 @@ namespace FuteBet.Dominio.ValuesObjects
         public Senha(string senhaForte)
         {
             SenhaForte = senhaForte;
-            if (!ValidaSenha(SenhaForte)){
+            if (SenhaForte.Length<5 || string.IsNullOrEmpty(SenhaForte) ){
                 AddNotification("Senha", "Senha fraca.");
             }
         }

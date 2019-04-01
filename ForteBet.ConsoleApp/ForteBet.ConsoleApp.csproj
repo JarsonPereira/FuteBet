@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SimpleInjector" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FuteBet.Dominio\FuteBet.Dominio.csproj" />
     <ProjectReference Include="..\FuteBet.Infra\FuteBet.Infra.csproj" />
     <ProjectReference Include="..\FuteBet.Shared\FuteBet.Shared.csproj" />

@@ -9,6 +9,10 @@ namespace FuteBet.Dominio.Commands.Response
 {
     public class LoginUsuarioResponse:IResponse
     {
+
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public Guid  ID { get; set; }
         public bool Autenticado { get; set; }
         public string Token { get;  set; }
         public DateTime DataInicio { get; set; }
