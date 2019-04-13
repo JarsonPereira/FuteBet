@@ -10,5 +10,6 @@ namespace FuteBet.Dominio.Repositorio
     public interface IUsuarioRepositorio
     {
         LoginUsuarioResult LoginUsuario(Usuario loginUsuario);
+        bool SalvarUsuario(Usuario usuario);
     }
 }

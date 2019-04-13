@@ -1,4 +1,5 @@
-﻿using FuteBet.Dominio.Commands.Request;
+﻿using FluentValidator;
+using FuteBet.Dominio.Commands.Request;
 using FuteBet.Dominio.Commands.Response;
 using FuteBet.Dominio.Entidade;
 using FuteBet.Dominio.Enum;
@@ -12,7 +13,7 @@ using System.Text;
 
 namespace FuteBet.Dominio.Commands.Command
 {
-    public class UsuarioCommandHandler : ICommandHandler<LoginUsuarioRequest>
+    public class UsuarioCommandHandler : ICommandHandler<LoginUsuarioRequest>,ICommandHandler<CadastroUsuarioRequest>
     {
         private readonly IUsuarioRepositorio usuarioRepositorio;
 
@@ -47,12 +48,43 @@ namespace FuteBet.Dominio.Commands.Command
             loginUsuarioRequest.Autenticado = true;
             loginUsuarioRequest.DataInicio = DateTime.Now;
             loginUsuarioRequest.DataExpiracao = loginUsuarioRequest.DataInicio.AddMinutes(15);
-            loginUsuarioRequest.Token = loginUsuario.Token;
             loginUsuarioRequest.ID = loginUsuario.ID;
             loginUsuarioRequest.Email = loginUsuario.Email;
             loginUsuarioRequest.Nome = loginUsuario.Nome;
 
             return loginUsuarioRequest;
+        }
+
+        public IResponse Handler(CadastroUsuarioRequest request)
+        {
+              CadastroUsuarioResponse cadastroUsuarioRequest = new CadastroUsuarioResponse();
+            Email email = new Email(request.Email);
+            Senha senha = new Senha(request.Senha);
+            Documento documento = new Documento(request.Documento);
+
+            Usuario usuario = new Usuario(request.Nome,documento,email, senha,Status.Ativo);
+            if (!usuario.IsValid())
+            {
+                cadastroUsuarioRequest.Cadastrado = false;
+                cadastroUsuarioRequest.Notificacoes =(List<Notification>) usuario.Notifications;
+                return cadastroUsuarioRequest;
+            }
+
+            bool salvo = usuarioRepositorio.SalvarUsuario(usuario);
+
+            if (salvo)
+            {
+                 cadastroUsuarioRequest.Cadastrado = true;
+              
+                return cadastroUsuarioRequest;
+            }
+            else
+            {
+                 cadastroUsuarioRequest.Cadastrado = false;
+                cadastroUsuarioRequest.Notificacoes =(List<Notification>) usuario.Notifications;
+                return cadastroUsuarioRequest;
+            }
+           
         }
     }
 }
