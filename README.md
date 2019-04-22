@@ -1,5 +1,5 @@
 
-<h1> FuteBet - Uma aplicação para apostas </h1>
+<h1> FuteBet - Uma aplicação para apostas (Em Desenvolvimento) </h1>
 <h5>Por: Jarson Oliveira</h5>
 <img  src="https://apostasonline.pt/wp-content/uploads/2017/07/apostasonline_logo.svg"/>
 <ul>
