@@ -6,8 +6,7 @@
 <li><h3>CQRS</h3></li>
 <li><h3>DDD</h3></li>
 <li><h3>IOC</h3></li>
-<li><h3>SAGA</h3></li>
-<li><h3>distributed cache - Redis</h3></li>
+<li><h3>Distributed Cache</h3></li>
 </ul>
 
 CartolaFC API (2016 / 2017)
